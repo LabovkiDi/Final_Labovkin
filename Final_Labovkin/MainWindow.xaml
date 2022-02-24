@@ -1,0 +1,237 @@
+﻿<Window x:Class="Lab1WpfApp1_Labovkin.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab1WpfApp1_Labovkin"
+        mc:Ignorable="d"
+        Title="Калькулятор" Height="700" Width="380" 
+        FontFamily="Arial Black" Visibility="Visible"
+        WindowStartupLocation="CenterScreen" FontSize="20"
+        ResizeMode="NoResize"
+        BorderThickness="0" WindowStyle="ThreeDBorderWindow"
+        HorizontalContentAlignment="Center">
+    <!--опишем ресурсы кнопок: линейный градиент и ключ в словаре-->
+    <Window.Resources>
+        <LinearGradientBrush x:Key="Brush4">
+            <GradientStop Color="LightSlateGray" Offset="0"/>
+            <GradientStop Color="LightGray" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="Brush3">
+            <GradientStop Color="#FFC4D0" Offset="0"/>
+            <GradientStop Color="#F8E8E7" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="Brush2">
+            <GradientStop Color="#930077" Offset="0"/>
+            <GradientStop Color="#E61C50" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="Brush1">
+            <GradientStop Color="#D72323" Offset="0"/>
+            <GradientStop Color="#F73859" Offset="1"/>
+        </LinearGradientBrush>
+        <!--опишем свойства, которые сработают при наведении курсором на кнопки-->
+        <Style x:Key="ZeroButton" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkSlateGray"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Width" Value="160"/>
+            <Setter Property="Background" Value="#323232"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <!--внешний вид кнопки-->
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="30" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="AllButtons" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="DarkSlateGray"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Background" Value="#323232"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="40" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ResultButton" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Brush2}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Background" Value="{StaticResource Brush4}"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="40" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ComputeButtons" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Brush2}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Brush3}"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Background" Value="{StaticResource Brush1}"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="40" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DiffButtons" TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Brush2}"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Brush3}"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Height" Value="70"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Background" Value="{StaticResource Brush4}"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="40" 
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <!--устанавливаем сколько будет столбцов и строк-->
+    <Grid x:Name="MainRoot" Background="#212121">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <!--располагаем кнопки, присваивая им значения, свойства и события-->
+        <Button Content="0" Style="{StaticResource ZeroButton}" 
+                Grid.ColumnSpan="2" Grid.Row="6" Click="Button_Click_Nums"/>
+        <Button Content="," Style="{StaticResource AllButtons}" 
+                Grid.Column="2" Grid.Row="6" Click="Button_Click_Point"/>
+        <Button Content="=" Style="{StaticResource ResultButton}" 
+                Grid.Column="3" Grid.Row="6" Click="Button_Click_Equal" />
+        <Button Content="1" Style="{StaticResource AllButtons}"
+                Grid.Column="0" Grid.Row="5" Click="Button_Click_Nums"/>
+        <Button Content="2" Style="{StaticResource AllButtons}"
+                Grid.Column="1" Grid.Row="5" Click="Button_Click_Nums"/>
+        <Button Content="3" Style="{StaticResource AllButtons}"
+                Grid.Column="2" Grid.Row="5" Click="Button_Click_Nums"/>
+        <Button Content="-" Style="{StaticResource ComputeButtons}"
+                Grid.Column="3" Grid.Row="5" Click="Button_Click_Oper"/>
+        <Button Content="4" Style="{StaticResource AllButtons}"
+                Grid.Column="0" Grid.Row="4" Click="Button_Click_Nums"/>
+        <Button Content="5" Style="{StaticResource AllButtons}"
+                Grid.Column="1" Grid.Row="4" Click="Button_Click_Nums"/>
+        <Button Content="6" Style="{StaticResource AllButtons}"
+                Grid.Column="2" Grid.Row="4" Click="Button_Click_Nums"/>
+        <Button Content="+" Style="{StaticResource ComputeButtons}"
+                Grid.Column="3" Grid.Row="4" Click="Button_Click_Oper"/>
+        <Button Content="7" Style="{StaticResource AllButtons}" 
+                Grid.Column="0" Grid.Row="3" Click="Button_Click_Nums"/>
+        <Button Content="8" Style="{StaticResource AllButtons}"
+                Grid.Column="1" Grid.Row="3" Click="Button_Click_Nums"/>
+        <Button Content="9" Style="{StaticResource AllButtons}" 
+                Grid.Column="2" Grid.Row="3" Click="Button_Click_Nums"/>
+        <Button Content="*" Style="{StaticResource ComputeButtons}"
+                Grid.Column="3" Grid.Row="3" Click="Button_Click_Oper" />
+        <Button Content="AC" Style="{StaticResource DiffButtons}"
+                Grid.Column="0" Grid.Row="2" Click="Button_Click_Clear" />
+        <Button Content="±" Style="{StaticResource DiffButtons}"
+                Grid.Column="1" Grid.Row="2" Click="Button_Click_Plus_Minus" />
+        <Button Content="√" Style="{StaticResource DiffButtons}"
+                Grid.Column="2" Grid.Row="2" Click="Button_Click"  />
+        <Button Content="/" Style="{StaticResource ComputeButtons}"
+                Grid.Column="3" Grid.Row="2" Click="Button_Click_Oper" />
+        <Rectangle Margin="10 0 10 0" Height="3" Grid.Column="0"
+                   Grid.Row="1" Grid.ColumnSpan="4" Fill="#323232"/>
+        <TextBox x:Name="textBox" Margin="12 0 12 0" Grid.Row="1" Grid.ColumnSpan="4"
+                 FontSize="40" Foreground="LightGray" Background="#212121"
+                 TextWrapping="Wrap" BorderThickness="0"/>
+    </Grid>
+</Window>
